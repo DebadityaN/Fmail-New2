@@ -1,0 +1,17 @@
+{% extends "fmail/base.html" %}
+{% block content %}
+    <article class="media content-section">
+        <img class="rounded-circle article-img" src="{{ object.sender.profile.image.url }}">
+      <div class="media-body">
+        <div class="article-metadata">
+          <a class="mr-2" href="{% url 'user-mails' object.sender.username %}">{{ object.sender }}</a>
+          <small class="text-muted">{{ object.datetime|date:"j/n/Y - g:i A" }}</small>
+            {% if object.sender == user %}
+                <a class="btn btn-outline-danger btn-sm mt-1 mb-1" href="{% url 'mail-delete' object.id %}">Delete</a>
+            {% endif %}
+        </div>
+        <h2 class="article-title">{{ object.title }}</h2>
+        <p class="article-content">{{ object.info }}</p>
+      </div>
+    </article>
+{% endblock content %}
